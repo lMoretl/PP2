@@ -112,7 +112,7 @@ class Food2:
             self.y = random.randint(0,19)
             q = [self.x, self.y]
     def draw(self, screen):
-        pygame.draw.rect(screen, (128,0,255), pygame.Rect(self.x*20,self.y*20,20,20))
+        pygame.draw.rect(screen, (255,0,0), pygame.Rect(self.x*20,self.y*20,20,20))
     def new(self, S, W, F, F1):
         self.x = random.randint(0,19)
         self.y = random.randint(0,19)
@@ -201,16 +201,19 @@ while True:
         score += 1
         F.new(S,W,F1,F2)
         S.body.append([F.x,F.y])
+        pygame.mixer.Sound('apple.mp3').play()
     if S.body[0][0] == F1.x and S.body[0][1] == F1.y:
         score += 2
         F1.new(S,W,F,F2)
         time1 = 0
         S.body.append([F1.x,F1.y])
+        pygame.mixer.Sound('apple.mp3').play()
     if S.body[0][0] == F2.x and S.body[0][1] == F2.y:
-        score += 3
+        score -= 1
         F2.new(S,W,F,F1)
         time2 = 0
-        S.body.append([F2.x,F2.y])
+        S.body.pop(-1)
+        pygame.mixer.Sound('ap.mp3').play()
     for i in range(1,len(S.body)):
         if S.body[0][0] == S.body[i][0] and S.body[0][1] == S.body[i][1]:
             Over = True
